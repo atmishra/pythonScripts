@@ -20,6 +20,6 @@ def callback():
 errmsg = 'Error!'
 
 Button(root,text='Select Folder', command = callback, width=10 ).pack()
-Button(root,text='Close', command = root.Close(), width=10 ).pack()
+Button(root,text='Close', width=10 ).pack()
 root.mainloop()
 
