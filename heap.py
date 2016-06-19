@@ -1,18 +1,18 @@
+'''This is the implementation for Binary Heap'''
+
 class Heap(object):
-	def __init__(self):
-		self.hlist = ["dummy"]
-		self.hsize = 0
+	def __init__(self, alist):
+
+		'''initialize heap to the input list'''
+		self.hlist = ["dummy"]+alist #To start indexing from 1
+		self.hsize = len(self.hlist)-1 
 
 	def __str__(self):
-		return "%s" %self.hlist[1:]
-
-	def inputList(self, alist):
-
-		self.hlist = [0] + alist
-
-		self.hsize = len(self.hlist) - 1
+		return "%s" %self.hlist[1:] #The actual heap starts from index 1
 
 	def max_heapify(self, node,size):
+		'''max_heapify performs perculate down operation on the heap. Node is the index 
+		   where the method is to applied annd size is the size of the list'''
 		left_child = 2*node
 		right_child = left_child + 1
 		largest = node
@@ -31,14 +31,16 @@ class Heap(object):
 
 			self.max_heapify(largest,size)
 
-		# return self.hlist[1:]
+		
 
 	def build_max_heap(self):
+		'''Builds max heap for the list provided'''
 		for i in range(self.hsize//2,0,-1):
 			self.max_heapify(i,self.hsize)
 		
 
 	def deleteMax(self):
+		'''Delete max element from the Heap maintaining the Heap property'''
 		if self.hsize < 1:
 			print "UnderFlow"
 		max = self.hlist[1]
@@ -49,6 +51,7 @@ class Heap(object):
 		return max
 
 	def perUp(self,i):
+		'''perform perculate Up operation on the Heap'''
 		while i//2>0:
 
 			if self.hlist[i]>self.hlist[i//2]:
@@ -56,6 +59,8 @@ class Heap(object):
 			i = i//2
 
 	def insert(self,value):
+		'''Inserts new value into the Heap maintaining the Heap property'''
+
 		self.hlist.append(value)
 		self.hsize += 1
 		self.perUp(self.hsize)
@@ -64,6 +69,7 @@ class Heap(object):
 		return self.hlist[1]
 
 	def heapsort(self):
+		'''Sorts the list provided to the Heap object using Heap Sort'''
 
 		self.max_heapify(1,self.hsize)
 		
@@ -79,14 +85,10 @@ class Heap(object):
 if __name__ == "__main__":
 
 	alist = [30,100,3,1,20,10,15]
-	newHeap = Heap()
-	newHeap.inputList(alist)
-	# newHeap.max_heapify(1,)
+	newHeap = Heap(alist)
 	print(newHeap)
 	newHeap.insert(70)
-	# print(newHeap)
-	# newHeap.deleteMax()
-	# print (newHeap)
+	print(newHeap.getMax())
 	newHeap.heapsort()
 	print(newHeap)
 
