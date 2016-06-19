@@ -11,8 +11,8 @@ class Heap(object):
 		return "%s" %self.hlist[1:] #The actual heap starts from index 1
 
 	def max_heapify(self, node,size):
-		'''max_heapify performs perculate down operation on the heap. Node is the index 
-		   where the method is to applied annd size is the size of the list'''
+		'''max_heapify performs perculate down operation on the heap. node is the index 
+		   where the method is to applied and size is the size of the list'''
 		left_child = 2*node
 		right_child = left_child + 1
 		largest = node
