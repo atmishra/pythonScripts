@@ -20,11 +20,16 @@ class LinkedList(Node):
 		self.head = None
 		self.count = 0
 
-	def insertEnd(self,data):
-		
+	def createNode(self,data):
 		node = Node(data)
 		self.count+=1
 		node.index = self.count
+		return node
+
+
+	def insertEnd(self,data):
+		
+		node = self.createNode(data)
 
 		if self.head == None:
 			self.head = node
@@ -34,15 +39,31 @@ class LinkedList(Node):
 
 	def insertFront(self,data):
 		
-		node = Node(data)
-		self.count+=1
-		node.index = self.count
+		node = self.createNode(data)
 
 		if self.head == None:
 			self.head = node
 		else:
 			node.next = self.head
 			self.head = node
+
+	def insertMiddle(self,data,pos):
+		if pos>self.count:
+			print("Invalid Position")
+		elif pos==1:
+			self.insertFront(data)
+		elif pos==self.count:
+			self.insertEnd(data)
+		else:
+			node = self.createNode(data)
+			temp = self.head
+			
+			print("pos=",pos)
+			for i in range(pos-2):
+				temp = temp.next
+				print("temp=",temp.data)
+			node.next = temp.next
+			temp.next = node
 
 	def iterate(self):
 		temp = self.head
@@ -52,6 +73,7 @@ class LinkedList(Node):
 
 	def printList(self):
 		temp = self.head
+
 		for i in range(self.count):
 			
 			print(temp.data)
@@ -65,11 +87,16 @@ if __name__ == "__main__":
 	ll.insertEnd(50)
 	ll.insertEnd(10)
 	ll.insertEnd(30)
-	
+	ll.printList()
+	print("="*100)
 	ll.insertFront(1)
 	ll.insertFront(2)
 	ll.insertFront(3)
 	ll.printList()
+	print("="*100)
+	ll.insertMiddle(100,3)
+	ll.printList()
+
 	print("Count: ",ll.count)
 
 
