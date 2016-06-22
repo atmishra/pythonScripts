@@ -2,16 +2,7 @@ class Node():
 	def __init__(self,data):
 		self.data=data
 		self.next=None
-		self.index=0
 
-	def getData(self):
-		return self.data
-
-	def getNext(self):
-		return self.next
-
-	def getIndex():
-		return self.index
 
 class LinkedList(Node):
 	head = None
@@ -23,7 +14,7 @@ class LinkedList(Node):
 	def createNode(self,data):
 		node = Node(data)
 		self.count+=1
-		node.index = self.count
+		
 		return node
 
 
@@ -58,12 +49,48 @@ class LinkedList(Node):
 			node = self.createNode(data)
 			temp = self.head
 			
-			print("pos=",pos)
 			for i in range(pos-2):
 				temp = temp.next
-				print("temp=",temp.data)
+				
 			node.next = temp.next
 			temp.next = node
+
+	def deleteLast(self):
+		if self.head:
+			temp = self.head 
+			while temp.next.next:
+				temp = temp.next
+			temp.next = None
+			self.count -= 1
+		else:
+			print("UnderFlow")
+
+	def deleteFirst(self):
+		if self.head:
+			self.head = self.head.next
+			self.count -=1
+		else:
+			print("UnderFlow")
+
+	def deleteMiddle(self,pos):
+		if pos>self.count or pos<1:
+			print ("Invalid Position")
+		elif self.count<1:
+			print("UnderFlow")
+			
+		elif pos==1:
+			self.deleteFirst()
+		elif pos==self.count:
+			self.deleteLast()
+		else:
+			temp1 = self.head.next
+			temp2 = self.head
+			for i in range(pos-2):
+				temp2 =temp1
+				temp1 = temp1.next
+			
+			temp2.next = temp1.next
+			self.count -=1
 
 	def iterate(self):
 		temp = self.head
@@ -83,21 +110,15 @@ if __name__ == "__main__":
 	ll = LinkedList()
 	ll.insertEnd(10)
 	ll.insertEnd(20)
-	ll.insertEnd(40)
-	ll.insertEnd(50)
-	ll.insertEnd(10)
-	ll.insertEnd(30)
-	ll.printList()
-	print("="*100)
 	ll.insertFront(1)
 	ll.insertFront(2)
 	ll.insertFront(3)
-	ll.printList()
-	print("="*100)
 	ll.insertMiddle(100,3)
+	print("="*80)
 	ll.printList()
-
+	ll.deleteMiddle(3)
 	print("Count: ",ll.count)
+	ll.printList()
 
 
 
