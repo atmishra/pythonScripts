@@ -39,7 +39,7 @@ class LinkedList(Node):
 			self.head = node
 
 	def insertMiddle(self,data,pos):
-		if pos>self.count:
+		if pos>self.count or pos<1:
 			print("Invalid Position")
 		elif pos==1:
 			self.insertFront(data)
